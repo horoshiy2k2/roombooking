@@ -7,9 +7,11 @@ User = get_user_model()
 
 class Room(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = (
+        models.TextField()
+    )  # can be rich text field with a lot of possibilities for customisation
     cost_per_hour = models.FloatField(default=1)
-    # closed hours # + new logic to set avaible times every day/week/month
+    # closed hours # + new logic to set available times every day/week/month
 
     def __str__(self):
         return self.name

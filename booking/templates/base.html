@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}RoomBooking{% endblock %}</title>
+    {% block style %}{% endblock %}
+    <style>
+        body {
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .site-header {
+            text-align: center;
+            padding: 1em;
+            background-color: #d0e0e0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #d0e0e0;
+            border-top: 1px solid #ddd;
+            margin-top: auto;
+        }
+
+        {% block specific_style %}{% endblock %}
+    </style>
+{% block script %}{% endblock %}
+</head>
+<body>
+<div class="site-header">
+    <h1>RoomBooking</h1>
+</div>
+{% block content %}{% endblock %}
+<div class="site-footer">
+    <h1>Footer</h1>
+</div>
+</body>
+</html>
