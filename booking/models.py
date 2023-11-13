@@ -11,6 +11,10 @@ class Room(models.Model):
         models.TextField()
     )  # can be rich text field with a lot of possibilities for customisation
     cost_per_hour = models.FloatField(default=1)
+    closed_from = models.TimeField()
+    closed_until = models.TimeField()  # should validate from and until when save
+    # can add Lunch Time, when closed, and some closed windows in a day. Also, can add wednesdays
+    # Also weekdays for room. Like Saturday and Sunday
     # closed hours # + new logic to set available times every day/week/month
 
     def __str__(self):
