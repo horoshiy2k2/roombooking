@@ -6,11 +6,13 @@
     <p>Cost: {{ room.cost_per_hour }}$ per hour</p>
 
     <h2>Book this Room:</h2>
+
     <form method="post" id="booking-room-form">
         {% csrf_token %}
-        <input type="hidden" name="room_id" value="{{ lesson.id }}">
+        {{ form }}
+        <input type="hidden" name="room_id" value="{{ room.id }}">
         <button type="submit" id="booking-room-form">Create soft booking for this room</button>
     </form>
 
-    {#   logic for book place AND seeing available hours #}
+    {#   logic for seeing available hours #}
 {% endblock %}

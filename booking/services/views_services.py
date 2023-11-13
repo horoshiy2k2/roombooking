@@ -17,6 +17,20 @@ def get_room_detail_context(request, room_id):
     return context
 
 
+def get_booking_records_context(request):
+    soft_booking_records = BookingRecord.objects.filter(
+        booking_type=BookingRecord.SOFT
+    )  # can add user filter here
+    hard_booking_records = BookingRecord.objects.filter(
+        booking_type=BookingRecord.HARD
+    )  # can add user filter here
+
+    context = {}
+    context["soft_booking_records"] = soft_booking_records
+    context["hard_booking_records"] = hard_booking_records
+    return context
+
+
 def create_soft_booking(request, room_id, form):
     booking_from = form.cleaned_data["booking_from"]
     booking_until = form.cleaned_data["booking_until"]
@@ -41,3 +55,17 @@ def get_duration(start_date_time, end_date_time):
 def calculate_cost(duration):
     # implement
     return 5
+
+
+def pay_for_booking(request):
+    name_pay_button = "create payment record"
+    if name_pay_button in request.POST:
+        booking_record_id = request.POST.get("booking_record_id")
+        booking_record = BookingRecord.objects.get(id=booking_record_id)
+        PaymentRecord.objects.create(
+            booking_record=booking_record, amount=booking_record.cost
+        )
+        booking_record.booking_type = (
+            booking_record.HARD
+        )  # can separate logic to other service
+        booking_record.save()

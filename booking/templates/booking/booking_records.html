@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Your soft bookings:</h1>
+    {% for booking_record in soft_booking_records %}
+        <h2>{{ booking_record.room }}</h2>
+        <h3>From: {{ booking_record.booking_from }} Until: {{ booking_record.booking_until }}</h3>
+        <h3>Duration: {{ booking_record.duration }}</h3>
+        <h3>Cost: {{ booking_record.cost }}</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="booking_record_id" value="{{ booking_record.id }}">
+            <button type="submit" name="create payment record">Pay for the Booking {{ booking_record }}</button>
+        </form>
+{#        + unbook option here#}
+    {% endfor %}
+
+    <h1>Your hard bookings:</h1>
+    {% for booking_record in hard_booking_records %}
+        <h2>{{ booking_record.room }}</h2>
+        <h3>From: {{ booking_record.booking_from }} Until: {{ booking_record.booking_until }}</h3>
+        <h3>Duration: {{ booking_record.duration }}</h3>
+        <h3>Duration: {{ booking_record.cost }}</h3>
+    {% endfor %}
+{% endblock %}

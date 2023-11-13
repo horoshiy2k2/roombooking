@@ -5,8 +5,10 @@ from django.views import View
 from .forms import BookingRoomForm
 from .services.views_services import (
     create_soft_booking,
+    get_booking_records_context,
     get_room_detail_context,
     get_room_list_context,
+    pay_for_booking,
 )
 
 
@@ -33,3 +35,15 @@ class RoomDetailView(View):
 
         room_detail_url = reverse("booking:room_detail", args=[room_id])
         return redirect(room_detail_url)
+
+
+class BookingRecordsView(View):
+    template_name = "booking/booking_records.html"
+
+    def get(self, request):
+        context = get_booking_records_context(request)
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        pay_for_booking(request)
+        return redirect("booking:booking_records")

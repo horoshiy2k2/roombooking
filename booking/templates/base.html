@@ -35,6 +35,8 @@
 <body>
 <div class="site-header">
     <h1>RoomBooking</h1>
+    <a href="{% url 'booking:room_list'%}">Room List</a>
+    <a href="{% url 'booking:booking_records'%}">My Bookings</a>
 </div>
 {% block content %}{% endblock %}
 <div class="site-footer">
